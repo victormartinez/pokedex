@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function PokeCard() {
+function PokeCard({pokemon}) {
     const classes = useStyles();
 
     return (
@@ -24,17 +24,17 @@ function PokeCard() {
               <CardActionArea>
                 <CardMedia
                   component="img"
-                  alt="Bulbasaur"
+                  alt={pokemon.name}
                   height="140"
-                  image="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"
-                  title="Bulbasaur"
+                  image={pokemon.image}
+                  title={pokemon.name}
                 />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="h2">
-                    Bulbasaur
+                    {pokemon.name}
                   </Typography>
                   <Typography variant="body2" color="textSecondary" component="p">
-                    GRASS | POISON
+                    {pokemon.types.map(type => type.toUpperCase()).join(" | ")}
                   </Typography>
                 </CardContent>
               </CardActionArea>
