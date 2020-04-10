@@ -42,15 +42,13 @@ class App extends Component {
   savePagination(data) {
     this.setState({
       count: data.count,
-      next: data.next,
-      previous: data.previous,
       results: []
     });
     return data;
   }
 
   savePokemons(pokemons) {
-    const { count, next, previous } = this.state;
+    const { count } = this.state;
     const results = pokemons.map(pokemon => {
       return {
         id: pokemon.id,
@@ -61,10 +59,9 @@ class App extends Component {
     });
     this.setState({
       count: count,
-      next: next,
-      previous: previous,
       results: results
-    })
+    });
+
   }
 
   onChangePage = (event, page) => {
