@@ -11,6 +11,7 @@ class App extends Component {
 
   constructor(props) {
     super(props);
+    this.itemsPerPage = 24;
 
     this.state = {
       count: 0,
@@ -21,17 +22,21 @@ class App extends Component {
   }
 
   componentDidMount() {
-    getPokemons(0, 24)
-      .then(res => handleResponse(res))
-      .then(data => this.savePagination(data))
-      .then(data => getUrls(data))
-      .then(urls => retrievePokemons(urls))
-      .then(res => handleResponseMany(res))
-      .then(pokemons => this.savePokemons(pokemons))
-      .catch(err => {
-        // TODO
-        console.log(err)
-      })
+    this.fetchAndRenderPokemons(1);
+  }
+
+  fetchAndRenderPokemons(page) {
+    getPokemons(page, this.itemsPerPage)
+    .then(res => handleResponse(res))
+    .then(data => this.savePagination(data))
+    .then(data => getUrls(data))
+    .then(urls => retrievePokemons(urls))
+    .then(res => handleResponseMany(res))
+    .then(pokemons => this.savePokemons(pokemons))
+    .catch(err => {
+      // TODO
+      console.log(err)
+    })
   }
 
   savePagination(data) {
@@ -60,7 +65,10 @@ class App extends Component {
       previous: previous,
       results: results
     })
-    console.log(this.state);
+  }
+
+  onChangePage = (event, page) => {
+    this.fetchAndRenderPokemons(page);
   }
 
   render () {
@@ -69,7 +77,9 @@ class App extends Component {
         <CssBaseline />
         <TopBar />
         <PokeGrid pokemons={this.state.results} />
-        <Pagination />
+        <Pagination 
+          count={Math.ceil(this.state.count / this.itemsPerPage)} 
+          onChange={this.onChangePage} />
       </React.Fragment>
     );
   }

@@ -4,7 +4,7 @@ const baseUrl = "https://pokeapi.co/api/v2";
 
 function getPokemons(page, limit) {
     const pageNumber = (page <= 0) ? 1 : page;
-    const offset = pageNumber - 1;
+    const offset = (pageNumber - 1) * limit;
 
     const url = `${baseUrl}/pokemon?offset=${offset}&limit=${limit}`;
     return axios.get(url);
