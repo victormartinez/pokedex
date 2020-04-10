@@ -4,6 +4,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import TopBar from './components/TopBar';
 import PokeGrid from './components/PokeGrid';
 import Pagination from './components/Pagination';
+import getPokemons, { retrievePokemons, handleResponse, handleResponseMany, getUrls } from './services/PokeApi';
 
 
 class App extends Component {
@@ -12,57 +13,54 @@ class App extends Component {
     super(props);
 
     this.state = {
-      pokemons: [
-        {
-          id: 1,
-          name: "Bulbasaur",
-          image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
-          types: ["grass", "poison"]
-        },
-        {
-          id: 2,
-          name: "Bulbasaur",
-          image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
-          types: ["grass", "poison"]
-        },
-        {
-          id: 3,
-          name: "Bulbasaur",
-          image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
-          types: ["grass", "poison"]
-        },
-        {
-          id: 4,
-          name: "Bulbasaur",
-          image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
-          types: ["grass", "poison"]
-        },
-        {
-          id: 5,
-          name: "Bulbasaur",
-          image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
-          types: ["grass", "poison"]
-        },
-        {
-          id: 6,
-          name: "Bulbasaur",
-          image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
-          types: ["grass", "poison"]
-        },
-        {
-          id: 7,
-          name: "Bulbasaur",
-          image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
-          types: ["grass", "poison"]
-        },
-        {
-          id: 8,
-          name: "Bulbasaur",
-          image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
-          types: ["grass", "poison"]
-        }
-      ]
+      count: 0,
+      next: null,
+      previous: null,
+      results: []
     }
+  }
+
+  componentDidMount() {
+    getPokemons(0, 24)
+      .then(res => handleResponse(res))
+      .then(data => this.savePagination(data))
+      .then(data => getUrls(data))
+      .then(urls => retrievePokemons(urls))
+      .then(res => handleResponseMany(res))
+      .then(pokemons => this.savePokemons(pokemons))
+      .catch(err => {
+        // TODO
+        console.log(err)
+      })
+  }
+
+  savePagination(data) {
+    this.setState({
+      count: data.count,
+      next: data.next,
+      previous: data.previous,
+      results: []
+    });
+    return data;
+  }
+
+  savePokemons(pokemons) {
+    const { count, next, previous } = this.state;
+    const results = pokemons.map(pokemon => {
+      return {
+        id: pokemon.id,
+        name: pokemon.name,
+        image: pokemon.sprites.front_default,
+        types: pokemon.types.map(type => { return type.type.name })
+      }
+    });
+    this.setState({
+      count: count,
+      next: next,
+      previous: previous,
+      results: results
+    })
+    console.log(this.state);
   }
 
   render () {
@@ -70,7 +68,7 @@ class App extends Component {
       <React.Fragment>
         <CssBaseline />
         <TopBar />
-        <PokeGrid pokemons={this.state.pokemons} />
+        <PokeGrid pokemons={this.state.results} />
         <Pagination />
       </React.Fragment>
     );
