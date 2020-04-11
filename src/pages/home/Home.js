@@ -1,18 +1,15 @@
 import React, { Component } from 'react';
-import CssBaseline from '@material-ui/core/CssBaseline';
 
-import TopBar from './components/TopBar';
-import PokeGrid from './components/PokeGrid';
-import Pagination from './components/Pagination';
-import getPokemons, { retrievePokemons, handleResponse, handleResponseMany, getUrls } from './services/PokeApi';
+import PokeGrid from '../../components/PokeGrid';
+import Pagination from '../../components/Pagination';
+import getPokemons, { retrievePokemons, handleResponse, handleResponseMany, getUrls } from '../../services/PokeApi';
 
 
-class App extends Component {
+class Home extends Component {
 
   constructor(props) {
     super(props);
     this.itemsPerPage = 24;
-
     this.state = {
       count: 0,
       next: null,
@@ -61,7 +58,6 @@ class App extends Component {
       count: count,
       results: results
     });
-
   }
 
   onChangePage = (event, page) => {
@@ -71,8 +67,6 @@ class App extends Component {
   render () {
     return (
       <React.Fragment>
-        <CssBaseline />
-        <TopBar />
         <PokeGrid pokemons={this.state.results} />
         <Pagination 
           count={Math.ceil(this.state.count / this.itemsPerPage)} 
@@ -81,4 +75,4 @@ class App extends Component {
     );
   }
 }
-export default App;
+export default Home;
