@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
+import Container from '@material-ui/core/Container';
 import HomeIcon from '@material-ui/icons/Home';
 import IconButton from '@material-ui/core/IconButton';
 import ListAltIcon from '@material-ui/icons/ListAlt';
@@ -28,21 +29,23 @@ function TopBar() {
   return (
     <div className={classes.root}>
       <AppBar position="static" color="secondary">
-        <Toolbar>
-          <Typography variant="h6" className={classes.title}>
-            Pokedex
-          </Typography>
-          <IconButton aria-label="home">
-            <Link to="/">
-              <HomeIcon className={classes.iconButton} />
-            </Link>
-          </IconButton>
-          <IconButton aria-label="pokedex">
-            <Link to="/pokedex">
-              <ListAltIcon className={classes.iconButton} />
-            </Link>
-          </IconButton>
-        </Toolbar>
+        <Container maxWidth="lg">
+          <Toolbar>
+            <Typography variant="h6" className={classes.title}>
+              Pokedex
+            </Typography>
+            <IconButton aria-label="home">
+              <Link to="/">
+                <HomeIcon className={classes.iconButton} />
+              </Link>
+            </IconButton>
+            <IconButton aria-label="pokedex">
+              <Link to="/pokedex">
+                <ListAltIcon className={classes.iconButton} />
+              </Link>
+            </IconButton>
+          </Toolbar>
+        </Container>
       </AppBar>
     </div>
   );
