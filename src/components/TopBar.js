@@ -17,6 +17,9 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
   },
+  iconButton: {
+    color: 'white'
+  }
 }));
 
 function TopBar() {
@@ -29,16 +32,16 @@ function TopBar() {
           <Typography variant="h6" className={classes.title}>
             Pokedex
           </Typography>
-            <IconButton aria-label="home" color="default">
-              <Link to="/">
-                <HomeIcon/>
-              </Link>
-            </IconButton>
-            <IconButton aria-label="pokedex" color="default">
-              <Link to="/pokedex">
-                <ListAltIcon/>
-              </Link>
-            </IconButton>
+          <IconButton aria-label="home">
+            <Link to="/">
+              <HomeIcon className={classes.iconButton} />
+            </Link>
+          </IconButton>
+          <IconButton aria-label="pokedex">
+            <Link to="/pokedex">
+              <ListAltIcon className={classes.iconButton} />
+            </Link>
+          </IconButton>
         </Toolbar>
       </AppBar>
     </div>
