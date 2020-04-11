@@ -12,8 +12,6 @@ class Home extends Component {
     this.itemsPerPage = 24;
     this.state = {
       count: 0,
-      next: null,
-      previous: null,
       results: []
     }
   }
