@@ -1,11 +1,10 @@
-import { EventEmitter } from 'events';
-import dispatcher from '../appDispatcher';
-import actionTypes from '../actions/actionTypes';
+import { EventEmitter } from "events";
+import dispatcher from "../appDispatcher";
+import actionTypes from "../actions/actionTypes";
 
 const CHANGE_EVENT = "change";
 
 class PokedexStore extends EventEmitter {
-
   addChangeListener(callback) {
     this.on(CHANGE_EVENT, callback);
   }
@@ -29,17 +28,17 @@ class PokedexStore extends EventEmitter {
 
 const store = new PokedexStore();
 
-dispatcher.register(action => {
+dispatcher.register((action) => {
   const pokedex = window.localStorage.getItem("pokedex");
 
-  switch(action.actionType) {
+  switch (action.actionType) {
     case actionTypes.CAPTURE_POKEMON:
       let data = "";
       if (pokedex === null) {
-        data = JSON.stringify([action.pokemon])
+        data = JSON.stringify([action.pokemon]);
       } else {
         const arr = JSON.parse(pokedex);
-        const pokemonIds = new Set(arr.map(pokemon => parseInt(pokemon.id)));
+        const pokemonIds = new Set(arr.map((pokemon) => parseInt(pokemon.id)));
 
         if (!pokemonIds.has(parseInt(action.pokemon.id))) {
           arr.push(action.pokemon);
@@ -53,13 +52,15 @@ dispatcher.register(action => {
       break;
 
     case actionTypes.FREE_POKEMON:
-      const res = JSON.parse(pokedex).filter(pokemon => pokemon.id !== parseInt(action.pokemon.id))
+      const res = JSON.parse(pokedex).filter(
+        (pokemon) => pokemon.id !== parseInt(action.pokemon.id)
+      );
       window.localStorage.setItem("pokedex", JSON.stringify(res));
       store.emitChange();
       break;
 
     default:
-      // do nothing
+    // do nothing
   }
 });
 

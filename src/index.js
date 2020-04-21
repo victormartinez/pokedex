@@ -1,17 +1,16 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter, Route, Switch} from "react-router-dom";
-import CssBaseline from '@material-ui/core/CssBaseline';
+import React from "react";
+import ReactDOM from "react-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import CssBaseline from "@material-ui/core/CssBaseline";
 
-import TopBar from './components/TopBar';
-import Home from './pages/home/Home';
-import Pokedex from './pages/pokedex/Pokedex';
+import TopBar from "./components/TopBar";
+import Home from "./pages/home/Home";
+import Pokedex from "./pages/pokedex/Pokedex";
 
-import './assets/css/main.css';
-
+import "./assets/css/main.css";
 
 ReactDOM.render(
-  <React.StrictMode >
+  <React.StrictMode>
     <BrowserRouter>
       <CssBaseline />
       <TopBar />
@@ -21,5 +20,5 @@ ReactDOM.render(
       </Switch>
     </BrowserRouter>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );

@@ -1,14 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import PokeGrid from '../../components/PokeGrid';
-import Pagination from '../../components/Pagination';
-import paginationStore from '../../stores/paginationStore';
-import pokemonStore from '../../stores/pokemonStore';
-import * as pokemonActions from '../../actions/pokemonActions';
-import * as pokedexActions from '../../actions/pokedexActions';
+import PokeGrid from "../../components/PokeGrid";
+import Pagination from "../../components/Pagination";
+import paginationStore from "../../stores/paginationStore";
+import pokemonStore from "../../stores/pokemonStore";
+import * as pokemonActions from "../../actions/pokemonActions";
+import * as pokedexActions from "../../actions/pokedexActions";
 
 class Home extends Component {
-
   constructor(props) {
     super(props);
     this.itemsPerPage = 24;
@@ -29,29 +28,31 @@ class Home extends Component {
   onChange = () => {
     this.setState({
       count: paginationStore.getCount(),
-      pokemons: pokemonStore.getPokemons()
+      pokemons: pokemonStore.getPokemons(),
     });
-  }
+  };
 
   onChangePage = (event, page) => {
-    this.setState({ count: null, pokemons: null});
+    this.setState({ count: null, pokemons: null });
     pokemonActions.loadPokemons(page, this.itemsPerPage);
-  }
+  };
 
   capturePokemonHandler(pokemon) {
     pokedexActions.capturePokemon(pokemon);
   }
 
-  render () {
+  render() {
     return (
       <React.Fragment>
         <PokeGrid
           pokemons={this.state.pokemons}
-          onCapturePokemon={this.capturePokemonHandler} />
+          onCapturePokemon={this.capturePokemonHandler}
+        />
 
         <Pagination
           count={Math.ceil(this.state.count / this.itemsPerPage)}
-          onChange={this.onChangePage} />
+          onChange={this.onChangePage}
+        />
       </React.Fragment>
     );
   }

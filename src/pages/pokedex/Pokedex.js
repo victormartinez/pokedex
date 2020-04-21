@@ -1,20 +1,19 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import PokeGrid from '../../components/PokeGrid';
-import * as pokedexActions from '../../actions/pokedexActions';
-import pokedexStore from '../../stores/pokedexStore';
+import PokeGrid from "../../components/PokeGrid";
+import * as pokedexActions from "../../actions/pokedexActions";
+import pokedexStore from "../../stores/pokedexStore";
 
 class Pokedex extends Component {
-
   constructor(props) {
     super(props);
-    this.state = { pokemons: [] }
+    this.state = { pokemons: [] };
   }
 
   componentDidMount() {
     pokedexStore.addChangeListener(this.onChange);
     this.setState({
-      pokemons: pokedexStore.getPokemons()
+      pokemons: pokedexStore.getPokemons(),
     });
   }
 
@@ -24,20 +23,21 @@ class Pokedex extends Component {
 
   onChange = () => {
     this.setState({
-      pokemons: pokedexStore.getPokemons()
+      pokemons: pokedexStore.getPokemons(),
     });
-  }
+  };
 
   freePokemonHandler(pokemon) {
     pokedexActions.freePokemon(pokemon);
   }
 
-  render () {
+  render() {
     return (
       <React.Fragment>
-          <PokeGrid
-            pokemons={this.state.pokemons}
-            onFreePokemon={this.freePokemonHandler} />
+        <PokeGrid
+          pokemons={this.state.pokemons}
+          onFreePokemon={this.freePokemonHandler}
+        />
       </React.Fragment>
     );
   }
