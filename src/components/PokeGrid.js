@@ -22,24 +22,24 @@ function Loader() {
   );
 }
 
-function Main({pokemons}) {
+function Main(props) {
 
   const itemsPerRow = 6;
-  if (pokemons.length > 0) {
-    const chunks = chunkArray(pokemons, itemsPerRow);
+  if (props.pokemons.length > 0) {
+    const chunks = chunkArray(props.pokemons, itemsPerRow);
     return chunks.map((row, index) => {
-      return <PokeRow key={index} pokemons={row} />
+      return <PokeRow key={index} pokemons={row} onCapturePokemon={props.onCapturePokemon} />
     })
   } else {
     return <Loader />
   }
 }
 
-function PokeGrid({ pokemons }) {
+function PokeGrid(props) {
   return (
     <Container maxWidth="lg">
-      <Main pokemons={pokemons} />
+      <Main {...props} />
     </Container>
   );
-} 
+}
 export default PokeGrid;

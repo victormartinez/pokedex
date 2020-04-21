@@ -15,36 +15,37 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function PokeCard({pokemon}) {
-    const classes = useStyles();
+function PokeCard(props) {
+  const classes = useStyles();
+  const pokemon = props.pokemon;
 
-    return (
-        <Grid item xs={2}>
-            <Card className={classes.card}>
-              <CardActionArea>
-                <CardMedia
-                  component="img"
-                  alt={pokemon.name}
-                  height="140"
-                  image={pokemon.image}
-                  title={pokemon.name}
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="h2">
-                    {pokemon.name}
-                  </Typography>
-                  <Typography variant="body2" color="textSecondary" component="p">
-                    {pokemon.types.map(type => type.toUpperCase()).join(" | ")}
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-              <CardActions>
-                <Button size="small" color="primary">
-                  Capture
-                </Button>
-              </CardActions>
-            </Card>
-          </Grid>
-    );
+  return (
+      <Grid item xs={2}>
+          <Card className={classes.card}>
+            <CardActionArea>
+              <CardMedia
+                component="img"
+                alt={pokemon.name}
+                height="140"
+                image={pokemon.image}
+                title={pokemon.name}
+              />
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="h2">
+                  {pokemon.name}
+                </Typography>
+                <Typography variant="body2" color="textSecondary" component="p">
+                  {pokemon.types.map(type => type.toUpperCase()).join(" | ")}
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+            <CardActions>
+              <Button size="small" color="primary" onClick={() => props.onCapturePokemon(pokemon)}>
+                Capture
+              </Button>
+            </CardActions>
+          </Card>
+        </Grid>
+  );
 }
 export default PokeCard;

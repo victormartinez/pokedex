@@ -29,10 +29,10 @@ export function handleResponseMany(res) {
 }
 
 export function handleResponse(res) {
-    if (res.status !== 200) { 
-        throw Error(res);  
+    if (res.status !== 200) {
+        throw Error(res);
     }
-    return res.data;   
+    return res.data;
 }
 
 export default getPokemons;
