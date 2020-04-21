@@ -34,6 +34,7 @@ class Home extends Component {
   }
 
   onChangePage = (event, page) => {
+    this.setState({ count: 0, pokemons: []});
     pokemonActions.loadPokemons(page, this.itemsPerPage);
   }
 
