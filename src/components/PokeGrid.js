@@ -28,7 +28,7 @@ function Main(props) {
   if (props.pokemons.length > 0) {
     const chunks = chunkArray(props.pokemons, itemsPerRow);
     return chunks.map((row, index) => {
-      return <PokeRow key={index} pokemons={row} onCapturePokemon={props.onCapturePokemon} />
+      return <PokeRow key={index} pokemons={row} onCapturePokemon={props.onCapturePokemon} onFreePokemon={props.onFreePokemon} />
     })
   } else {
     return <Loader />

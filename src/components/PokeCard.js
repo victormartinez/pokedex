@@ -19,6 +19,12 @@ function PokeCard(props) {
   const classes = useStyles();
   const pokemon = props.pokemon;
 
+  function buttonHandler() {
+    return props.onCapturePokemon !== undefined
+      ? props.onCapturePokemon
+      : props.onFreePokemon
+  }
+
   return (
       <Grid item xs={2}>
           <Card className={classes.card}>
@@ -40,8 +46,8 @@ function PokeCard(props) {
               </CardContent>
             </CardActionArea>
             <CardActions>
-              <Button size="small" color="primary" onClick={() => props.onCapturePokemon(pokemon)}>
-                Capture
+              <Button size="small" color="primary" onClick={() => buttonHandler()(pokemon)}>
+                { props.onCapturePokemon !== undefined ? "Capture" : "Free" }
               </Button>
             </CardActions>
           </Card>

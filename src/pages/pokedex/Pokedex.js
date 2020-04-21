@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 
 import PokeGrid from '../../components/PokeGrid';
+import * as pokedexActions from '../../actions/pokedexActions';
 import pokedexStore from '../../stores/pokedexStore';
 
 class Pokedex extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      pokemons: []
-    }
+    this.state = { pokemons: [] }
   }
 
   componentDidMount() {
@@ -29,10 +28,16 @@ class Pokedex extends Component {
     });
   }
 
+  freePokemonHandler(pokemon) {
+    pokedexActions.freePokemon(pokemon);
+  }
+
   render () {
     return (
       <React.Fragment>
-          <PokeGrid pokemons={this.state.pokemons} />
+          <PokeGrid
+            pokemons={this.state.pokemons}
+            onFreePokemon={this.freePokemonHandler} />
       </React.Fragment>
     );
   }

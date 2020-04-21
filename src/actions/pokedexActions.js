@@ -7,3 +7,10 @@ export function capturePokemon(pokemon) {
     pokemon: pokemon
   });
 }
+
+export function freePokemon(pokemon) {
+  dispatcher.dispatch({
+    actionType: actionTypes.FREE_POKEMON,
+    pokemon: pokemon
+  });
+}

@@ -8,7 +8,7 @@ function PokeRow(props) {
     <Grid container spacing={3}>
       {
         props.pokemons.map(pokemon => {
-          return <PokeCard key={pokemon.id} pokemon={pokemon} onCapturePokemon={props.onCapturePokemon} />
+          return <PokeCard key={pokemon.id} pokemon={pokemon} onCapturePokemon={props.onCapturePokemon} onFreePokemon={props.onFreePokemon} />
         })
       }
     </Grid>

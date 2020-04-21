@@ -30,10 +30,11 @@ class PokedexStore extends EventEmitter {
 const store = new PokedexStore();
 
 dispatcher.register(action => {
+  const pokedex = window.localStorage.getItem("pokedex");
+
   switch(action.actionType) {
     case actionTypes.CAPTURE_POKEMON:
       let data = "";
-      const pokedex = window.localStorage.getItem("pokedex");
       if (pokedex === null) {
         data = JSON.stringify([action.pokemon])
       } else {
@@ -42,6 +43,12 @@ dispatcher.register(action => {
         data = JSON.stringify(arr)
       }
       window.localStorage.setItem("pokedex", data);
+      store.emitChange();
+      break;
+
+    case actionTypes.FREE_POKEMON:
+      const res = JSON.parse(pokedex).filter(pokemon => pokemon.id !== parseInt(action.pokemon.id))
+      window.localStorage.setItem("pokedex", JSON.stringify(res));
       store.emitChange();
       break;
 
