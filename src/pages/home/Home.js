@@ -12,12 +12,12 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.itemsPerPage = 24;
-    this.state = { count: 0, pokemons: [] };
+    this.state = { count: null, pokemons: null };
   }
 
   componentDidMount() {
     pokemonStore.addChangeListener(this.onChange);
-    if (this.state.pokemons.length === 0) {
+    if (this.state.pokemons === null) {
       pokemonActions.loadPokemons(1, this.itemsPerPage);
     }
   }
@@ -34,7 +34,7 @@ class Home extends Component {
   }
 
   onChangePage = (event, page) => {
-    this.setState({ count: 0, pokemons: []});
+    this.setState({ count: null, pokemons: null});
     pokemonActions.loadPokemons(page, this.itemsPerPage);
   }
 

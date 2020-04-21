@@ -1,7 +1,10 @@
 import React from 'react';
+
+import Alert from '@material-ui/lab/Alert';
 import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Grid from '@material-ui/core/Grid';
 
 import PokeRow from './PokeRow';
 
@@ -24,13 +27,21 @@ function Loader() {
 
 function Main(props) {
   const itemsPerRow = 6;
-  if (props.pokemons.length > 0) {
+  if (props.pokemons === null) {
+    return <Loader />
+  } else if (props.pokemons.length > 0) {
     const chunks = chunkArray(props.pokemons, itemsPerRow);
     return chunks.map((row, index) => {
       return <PokeRow key={index} pokemons={row} onCapturePokemon={props.onCapturePokemon} onFreePokemon={props.onFreePokemon} />
     })
   } else {
-    return <Loader />
+    return (
+      <Grid container spacing={12}>
+        <Alert severity="warning" display="flex" m="auto">
+          You have no pokemons yet.
+        </Alert>
+      </Grid>
+    )
   }
 }
 
