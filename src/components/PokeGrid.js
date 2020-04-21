@@ -23,7 +23,6 @@ function Loader() {
 }
 
 function Main(props) {
-
   const itemsPerRow = 6;
   if (props.pokemons.length > 0) {
     const chunks = chunkArray(props.pokemons, itemsPerRow);

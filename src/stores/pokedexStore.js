@@ -39,8 +39,14 @@ dispatcher.register(action => {
         data = JSON.stringify([action.pokemon])
       } else {
         const arr = JSON.parse(pokedex);
-        arr.push(action.pokemon);
-        data = JSON.stringify(arr)
+        const pokemonIds = new Set(arr.map(pokemon => parseInt(pokemon.id)));
+
+        if (!pokemonIds.has(parseInt(action.pokemon.id))) {
+          arr.push(action.pokemon);
+          data = JSON.stringify(arr);
+        } else {
+          data = JSON.stringify(arr);
+        }
       }
       window.localStorage.setItem("pokedex", data);
       store.emitChange();

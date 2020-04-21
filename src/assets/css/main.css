@@ -1,0 +1,21 @@
+.pokeball-filled {
+  background: url(../imgs/pokeball-filled.png) no-repeat center center;
+  background-size: 32px 32px;
+  width: 44px;
+  height: 44px;
+  text-indent: -9999px;
+  display: inline-block;
+  transition: .4s;
+  margin-right: 1em;
+}
+
+.pokeball-unfilled {
+  background: url(../imgs/pokeball-unfilled.png) no-repeat center center;
+  background-size: 32px 32px;
+  width: 44px;
+  height: 44px;
+  text-indent: -9999px;
+  display: inline-block;
+  transition: .4s;
+  margin-right: 1em;
+}

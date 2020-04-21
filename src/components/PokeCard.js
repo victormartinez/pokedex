@@ -12,7 +12,7 @@ import Typography from '@material-ui/core/Typography';
 const useStyles = makeStyles((theme) => ({
     card: {
       maxWidth: 345,
-    },
+    }
 }));
 
 function PokeCard(props) {
@@ -23,6 +23,10 @@ function PokeCard(props) {
     return props.onCapturePokemon !== undefined
       ? props.onCapturePokemon
       : props.onFreePokemon
+  }
+
+  function isPokedex() {
+    return props.onCapturePokemon === undefined;
   }
 
   return (
@@ -41,13 +45,19 @@ function PokeCard(props) {
                   {pokemon.name}
                 </Typography>
                 <Typography variant="body2" color="textSecondary" component="p">
-                  {pokemon.types.map(type => type.toUpperCase()).join(" | ")}
+                  { pokemon.types.map(type => type.toUpperCase()).join(" | ") }
                 </Typography>
               </CardContent>
             </CardActionArea>
             <CardActions>
-              <Button size="small" color="primary" onClick={() => buttonHandler()(pokemon)}>
-                { props.onCapturePokemon !== undefined ? "Capture" : "Free" }
+              <Button
+                 className={isPokedex() ? "pokeball-unfilled" : "pokeball-filled"}
+                 onClick={() => buttonHandler()(pokemon)}>
+                    {
+                      props.onCapturePokemon !== undefined
+                      ? "Capture"
+                      : "Free"
+                    }
               </Button>
             </CardActions>
           </Card>

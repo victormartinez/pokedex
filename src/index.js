@@ -7,6 +7,8 @@ import TopBar from './components/TopBar';
 import Home from './pages/home/Home';
 import Pokedex from './pages/pokedex/Pokedex';
 
+import './assets/css/main.css';
+
 
 ReactDOM.render(
   <React.StrictMode >
@@ -15,7 +17,7 @@ ReactDOM.render(
       <TopBar />
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route exact path="/pokedex" component={Pokedex} /> 
+        <Route exact path="/pokedex" component={Pokedex} />
       </Switch>
     </BrowserRouter>
   </React.StrictMode>,
